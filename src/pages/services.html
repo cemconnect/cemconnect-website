@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services — CEM Connect</title>
+<meta name="description" content="CEM Connect helps organizations adopt AI with purpose and transform customer experiences through practical strategy, clear priorities and actionable guidance.">
+{{HEAD}}
+<style>
+  .phero-sec { padding-top: clamp(64px,8vw,112px); padding-bottom: clamp(48px,6vw,72px); }
+  .phero-in { max-width: 940px; }
+  .phero h1 { font-size: clamp(36px,5.2vw,68px); }
+  .phero p { max-width: 56ch; margin-top: 28px; }
+
+  /* Jump links */
+  .jumps-wrap { padding-bottom: clamp(48px,6vw,72px); animation-delay: .24s; }
+  .jumps { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 0.5px solid var(--line); border-bottom: 0.5px solid var(--line); }
+  .jump { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 28px 22px 0; }
+  .jump + .jump { padding: 22px 0 22px 28px; border-left: 0.5px solid var(--line); }
+  .jump > span:first-child { display: flex; align-items: baseline; gap: 18px; }
+  .jump .num { font-size: 13px; color: var(--rose); }
+  .jl { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); transition: color .2s ease; }
+  .jarr { font-size: 15px; color: #8a847c; transition: transform .25s ease, color .2s ease; }
+  .jump:hover .jl, .jump:hover .jarr { color: var(--rose); }
+  .jump:hover .jarr { transform: translateY(3px); }
+
+  /* Dark service sections */
+  .svc-sec { background: var(--ink); color: var(--paper); scroll-margin-top: 72px; }
+  .svc-sec .wrap { padding-top: clamp(64px,8vw,104px); padding-bottom: clamp(56px,7vw,88px); }
+  .svc-head { padding-bottom: 36px; border-bottom: 0.5px solid rgba(255,255,255,0.18); }
+  .svc-head h2 { max-width: 22ch; }
+  .svc-intro { margin-top: 22px; max-width: 68ch; display: flex; flex-direction: column; gap: 12px; }
+  .svc-intro p { font-size: 16px; line-height: 1.65; color: rgba(244,242,238,0.8); text-wrap: pretty; }
+  .svc-intro p + p { font-size: 15px; color: rgba(244,242,238,0.58); }
+  .svc { display: grid; grid-template-columns: 30px minmax(0,0.8fr) minmax(0,1.15fr) minmax(0,0.75fr); gap: 16px clamp(20px,3vw,44px); padding: 36px 0; border-bottom: 0.5px solid rgba(255,255,255,0.08); align-items: start; }
+  .svc-ic { display: flex; margin-top: -5px; }
+  .svc h3 { font-size: clamp(18px,1.7vw,21px); font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; color: var(--paper); text-wrap: balance; }
+  .svc-body { display: flex; flex-direction: column; gap: 10px; }
+  .svc-body p { font-size: 15px; line-height: 1.6; color: rgba(244,242,238,0.82); text-wrap: pretty; }
+  .svc-body p + p { font-size: 14px; line-height: 1.65; color: rgba(244,242,238,0.55); }
+  .svc-out .mono { font-size: 10.5px; font-weight: 500; color: rgba(244,242,238,0.45); }
+  .svc-out ul { margin-top: 12px; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .svc-out li { display: flex; align-items: baseline; gap: 10px; font-size: 14px; line-height: 1.45; color: rgba(244,242,238,0.78); }
+  .svc-out li .dot { transform: translateY(-3px); }
+
+  /* AI Adoption Program */
+  .prog-sec { background: #fbf6f6; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  .prog-sec .wrap { padding-top: clamp(64px,8vw,104px); padding-bottom: clamp(64px,8vw,104px); }
+  .prog-sec .split { padding-bottom: 36px; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
+  .phases { position: relative; margin-top: 44px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(20px,3vw,40px); }
+  .hline { position: absolute; left: 26px; right: 12%; top: 26px; height: 0.5px; background: rgba(212,83,126,0.5); }
+  .vline { display: none; position: absolute; left: 26px; top: 26px; bottom: 40px; width: 0.5px; background: rgba(212,83,126,0.5); }
+  .phase { position: relative; }
+  .ph-ic { width: 52px; height: 52px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 0.5px rgba(212,83,126,0.45); position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; transition: background .25s ease; }
+  .phase:hover .ph-ic { background: #f7dce6; }
+  .ph-num { margin-top: 24px; font-size: 15px; color: var(--rose); }
+  .phase h3 { margin-top: 12px; font-size: 15px; font-weight: 600; letter-spacing: 0.12em; }
+  .phase p { margin-top: 12px; max-width: 30ch; font-size: 15px; line-height: 1.6; color: var(--sub); text-wrap: pretty; }
+  .prog-cta { margin-top: 44px; }
+  .prog-cta .cta { padding: 16px 28px; }
+
+  @media (max-width: 1024px) {
+    .svc { grid-template-columns: 30px minmax(0,1fr) minmax(0,1.2fr); }
+    .svc-out { grid-column: 2 / -1; }
+  }
+  @media (max-width: 900px) {
+    .phases { grid-template-columns: 1fr; gap: 28px; }
+    .phase { display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 0 22px; }
+    .ph-num { margin-top: 2px; }
+    .hline { display: none; }
+    .vline { display: block; }
+  }
+  @media (max-width: 720px) {
+    .svc { grid-template-columns: 30px minmax(0,1fr); }
+    .svc-body, .svc-out { grid-column: 2 / -1; }
+    .jumps { grid-template-columns: 1fr; }
+    .jump + .jump { border-left: 0; border-top: 0.5px solid var(--line); padding-left: 0; }
+  }
+</style>
+</head>
+<body data-page="services">
+<div id="top">
+{{HEADER}}
+
+  <main>
+    <section>
+      <div class="wrap phero phero-sec">
+        <div class="phero-in">
+          <span class="mono eyebrow rise">Our Expertise</span>
+          <h1 class="rise"><span>Two areas of expertise.</span><span>Built around <span class="rose">your business.</span></span></h1>
+          <p class="rise">CEM Connect helps organizations adopt AI with purpose and transform customer experiences through practical strategy, clear priorities and actionable guidance.</p>
+        </div>
+      </div>
+      <div class="wrap jumps-wrap rise">
+        <div class="jumps">
+          <a href="#ai" class="jump"><span><span class="num">01</span><span class="jl">AI Adoption &amp; Strategy</span></span><span class="jarr" aria-hidden="true">↓</span></a>
+          <a href="#cx" class="jump"><span><span class="num">02</span><span class="jl">Customer Experience Transformation</span></span><span class="jarr" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai" class="svc-sec">
+      <div class="wrap">
+        <div data-reveal class="svc-head">
+          <span class="mono eyebrow">01&nbsp; AI Adoption &amp; Strategy</span>
+          <h2 class="h2-sm">Make AI practical for your business.</h2>
+          <div class="svc-intro">
+            <p>AI creates opportunities across the business — but meaningful adoption starts with understanding where it can actually make a difference.</p>
+            <p>We help organizations assess their readiness, identify relevant use cases and build a practical path toward AI adoption that aligns with their business priorities and teams.</p>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="13.5" r="7.5"/><path d="M19 19l7 7"/><path d="M13.5 9.5c.3 2 1 2.7 3 3-2 .3-2.7 1-3 3-.3-2-1-2.7-3-3 2-.3 2.7-1 3-3z"/></svg></span>
+          <h3>AI Readiness &amp; Opportunity Assessment</h3>
+          <div class="svc-body">
+            <p>Understand where your organization stands today and where AI could create meaningful value.</p>
+            <p>We assess current AI usage, business processes, organizational readiness and potential use cases to identify the most relevant opportunities and priorities.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>AI readiness overview</li><li><span class="dot"></span>Business process observations</li><li><span class="dot"></span>Prioritized AI opportunities</li><li><span class="dot"></span>Recommended next steps</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="25" r="2.2"/><circle cx="16" cy="16" r="2.2"/><path d="M8.6 23.4l5.8-5.8"/><path d="M17.6 14.4l4.9-4.9"/><path d="M24 4v10"/><path d="M24 4.5h5l-1.6 2.3 1.6 2.3h-5"/></svg></span>
+          <h3>AI Strategy &amp; Roadmap</h3>
+          <div class="svc-body">
+            <p>Turn identified opportunities into a clear and realistic path forward.</p>
+            <p>We help define AI priorities, evaluate potential approaches and structure an actionable adoption roadmap aligned with business objectives and organizational capacity.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Prioritized AI initiatives</li><li><span class="dot"></span>AI adoption roadmap</li><li><span class="dot"></span>Recommended tools and approaches</li><li><span class="dot"></span>Implementation priorities</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="12" r="3.5"/><path d="M4.5 25c.6-4 3.2-6.5 6.5-6.5s5.9 2.5 6.5 6.5"/><path d="M19.5 7.5l5-2.5 5 2.5-5 2.5z"/><path d="M21.5 9v3.2c0 .9 1.3 1.8 3 1.8s3-.9 3-1.8V9"/><path d="M20 25c.3-2.8 1.8-4.8 4-5.6"/></svg></span>
+          <h3>AI Training &amp; Adoption</h3>
+          <div class="svc-body">
+            <p>Help teams understand how AI can support their work and build confidence using it responsibly.</p>
+            <p>We deliver practical training and adoption support tailored to business needs, roles and real workplace use cases.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Practical AI workshops</li><li><span class="dot"></span>Role-relevant use cases</li><li><span class="dot"></span>Usage guidance</li><li><span class="dot"></span>Adoption recommendations</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="prog-sec">
+      <div class="wrap">
+        <div data-reveal class="split">
+          <div><span class="mono eyebrow">AI Adoption Program</span><h2 class="h2-sm">A structured path from exploration to adoption.</h2></div>
+          <p>For organizations looking for more comprehensive support, the CEM Connect AI Adoption Program brings assessment, opportunity identification, strategy and team enablement into one structured engagement.</p>
+        </div>
+        <div data-reveal class="phases">
+          <span class="hline" aria-hidden="true"></span>
+          <span class="vline" aria-hidden="true"></span>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></div>
+            <div><div class="num ph-num">01</div><h3 class="mono">Assess</h3><p>Understand the organization, current processes, AI usage and readiness.</p></div>
+          </div>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg></div>
+            <div><div class="num ph-num">02</div><h3 class="mono">Identify</h3><p>Identify and prioritize practical AI opportunities based on business needs.</p></div>
+          </div>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 12h6M9 15.5h6M9 8.5h2.5"/></svg></div>
+            <div><div class="num ph-num">03</div><h3 class="mono">Strategize</h3><p>Translate opportunities into clear priorities and an actionable adoption roadmap.</p></div>
+          </div>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="2.8"/><path d="M3.5 19c.4-3.1 2.7-5 5.5-5s5.1 1.9 5.5 5"/><circle cx="16.5" cy="9.5" r="2.2"/><path d="M15.2 14.3c.4-.1.9-.2 1.3-.2 2.3 0 4 1.6 4.3 4.4"/></svg></div>
+            <div><div class="num ph-num">04</div><h3 class="mono">Enable</h3><p>Build team confidence through practical training, guidance and adoption support.</p></div>
+          </div>
+        </div>
+        <div class="prog-cta">
+          <a href="contact.html" class="cta cta-ink">Discuss Your AI Priorities <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="cx" class="svc-sec">
+      <div class="wrap">
+        <div data-reveal class="svc-head">
+          <span class="mono eyebrow">02&nbsp; Customer Experience Transformation</span>
+          <h2 class="h2-sm">Better experiences start with understanding the journey.</h2>
+          <div class="svc-intro">
+            <p>Great customer experiences are built by understanding where customers struggle, what they expect and how the business can respond.</p>
+            <p>We help organizations uncover friction across customer journeys and translate insights into practical transformation priorities.</p>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="10" r="3.5"/><path d="M4 24c.6-4 3.4-6.5 7-6.5 1.6 0 3 .5 4.2 1.4"/><circle cx="22" cy="20" r="4.5"/><path d="M25.3 23.3L29 27"/></svg></span>
+          <h3>Customer Experience Assessment</h3>
+          <div class="svc-body">
+            <p>Build a clearer understanding of the current customer experience and where improvement matters most.</p>
+            <p>We review key interactions, customer journeys and experience gaps to identify friction and opportunities for improvement.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Customer experience assessment</li><li><span class="dot"></span>Key pain points and friction</li><li><span class="dot"></span>Experience improvement opportunities</li><li><span class="dot"></span>Prioritized recommendations</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="8" r="2.2"/><circle cx="26" cy="16" r="2.2"/><circle cx="8" cy="25" r="2.2"/><path d="M8.2 8H20a4 4 0 0 1 0 8h-1.8"/><path d="M23.8 16H12a4.5 4.5 0 0 0 0 9h-1.8"/></svg></span>
+          <h3>Customer Journey Transformation</h3>
+          <div class="svc-body">
+            <p>Turn customer insights into better journeys and more intuitive experiences.</p>
+            <p>We help organizations map and rethink customer journeys, identify improvement opportunities and define future-state experiences aligned with customer and business needs.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Current-state journey analysis</li><li><span class="dot"></span>Future-state customer journeys</li><li><span class="dot"></span>Improvement opportunities</li><li><span class="dot"></span>Transformation roadmap</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="2.5"/><path d="M9.5 11.5l1.8 1.8 3.2-3.3"/><path d="M17.5 11.5h5"/><path d="M9.5 19l1.8 1.8 3.2-3.3"/><path d="M17.5 19h5"/></svg></span>
+          <h3>CX &amp; Digital Project Management</h3>
+          <div class="svc-body">
+            <p>Turn transformation priorities into structured initiatives.</p>
+            <p>We support CX and digital transformation projects through business requirements, prioritization, stakeholder coordination and delivery oversight.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Business requirements</li><li><span class="dot"></span>Project priorities and roadmap</li><li><span class="dot"></span>Stakeholder coordination</li><li><span class="dot"></span>Delivery support</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div data-reveal class="chips-sec">
+        <span class="mono eyebrow">Where we can help</span>
+        <h2>From friction to better experiences.</h2>
+        <div class="chips">
+          <span><span class="dot"></span>Customer Journeys</span>
+          <span><span class="dot"></span>Digital Onboarding</span>
+          <span><span class="dot"></span>Service Experiences</span>
+          <span><span class="dot"></span>Digital Products</span>
+          <span><span class="dot"></span>Process Improvement</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="endcard-sec">
+      <div data-reveal class="endcard">
+        <div>
+          <h2>Start with the challenge.</h2>
+          <p>Whether you’re exploring how AI could support your organization or looking to improve a customer journey, we start by understanding the business challenge first.</p>
+          <a href="contact.html" class="cta cta-rose">Let’s Talk <span class="arr2" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{{FOOTER}}
+</div>
+{{SCRIPTS}}
+</body>
+</html>

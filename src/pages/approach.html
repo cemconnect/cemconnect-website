@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our Approach — CEM Connect</title>
+<meta name="description" content="We start with the business challenge — not the technology. Insight, strategy and practical guidance to move from understanding what needs to change to making it happen.">
+{{HEAD}}
+<style>
+  .phero-sec { padding-top: clamp(64px,8vw,112px); padding-bottom: clamp(56px,7vw,88px); }
+  .phero p { max-width: 60ch; }
+
+  .how { padding-top: clamp(48px,6vw,80px); padding-bottom: clamp(48px,6vw,80px); }
+  .how h2 { margin-top: 16px; font-size: clamp(22px,2.4vw,32px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; text-wrap: balance; }
+
+  /* Methodology */
+  .method-sec { background: var(--ink); color: var(--paper); }
+  .method-sec .wrap { padding-top: clamp(64px,8vw,104px); padding-bottom: clamp(64px,8vw,104px); }
+  .method-sec > .wrap > h2 { font-size: clamp(26px,3vw,40px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.12; }
+  .method { position: relative; margin-top: 48px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(24px,3vw,44px); }
+  .hline { position: absolute; left: 26px; right: 12%; top: 26px; height: 0.5px; background: rgba(212,83,126,0.55); }
+  .vline { display: none; position: absolute; left: 26px; top: 26px; bottom: 60px; width: 0.5px; background: rgba(212,83,126,0.45); }
+  .mstep { position: relative; }
+  .m-ic { width: 52px; height: 52px; border-radius: 50%; background: var(--ink); box-shadow: inset 0 0 0 0.5px rgba(212,83,126,0.7); position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; transition: background .25s ease; }
+  .mstep:hover .m-ic { background: #2a2219; }
+  .m-label { margin-top: 26px; display: flex; align-items: baseline; gap: 14px; }
+  .m-label .num { font-size: 34px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: var(--rose); }
+  .m-label .mono { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; color: var(--paper); }
+  .mstep h3 { margin-top: 20px; font-size: clamp(19px,1.7vw,22px); font-weight: 500; letter-spacing: -0.015em; line-height: 1.25; color: var(--paper); text-wrap: balance; }
+  .mstep p { margin-top: 12px; font-size: 14.5px; line-height: 1.65; color: rgba(244,242,238,0.6); text-wrap: pretty; }
+  .mstep ul { margin-top: 22px; list-style: none; border-top: 0.5px solid rgba(255,255,255,0.1); }
+  .mstep li { display: flex; align-items: baseline; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid rgba(255,255,255,0.07); font-size: 13.5px; line-height: 1.4; color: rgba(244,242,238,0.8); }
+  .mstep li .dot { transform: translateY(-3px); }
+
+  /* Partnering */
+  .partner-sec { background: #faf8f6; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+  .partner-sec .wrap { padding-top: clamp(64px,8vw,104px); padding-bottom: clamp(64px,8vw,104px); }
+  .partner-sec .split { padding-bottom: 36px; border-bottom: 0.5px solid var(--line); }
+  .partner { margin-top: 44px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .pcol { padding: 8px clamp(20px,3vw,44px); border-left: 0.5px solid rgba(0,0,0,0.12); }
+  .pcol:first-child { padding-left: 0; border-left: 0; }
+  .pcol svg { display: block; }
+  .pcol h3 { margin-top: 28px; font-size: 15px; font-weight: 600; letter-spacing: 0.12em; }
+  .pcol p { margin-top: 14px; max-width: 38ch; font-size: 15.5px; line-height: 1.65; color: var(--muted); text-wrap: pretty; }
+
+  @media (max-width: 1024px) {
+    .method { grid-template-columns: repeat(2,minmax(0,1fr)); row-gap: 48px; }
+    .hline { display: none; }
+  }
+  @media (max-width: 800px) {
+    .partner { grid-template-columns: 1fr; }
+    .pcol, .pcol:first-child { padding: 28px 0; border-left: 0; border-top: 0.5px solid rgba(0,0,0,0.12); }
+  }
+  @media (max-width: 640px) {
+    .method { grid-template-columns: 1fr; row-gap: 36px; }
+    .mstep { display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 0 20px; }
+    .m-label { margin-top: 8px; }
+    .vline { display: block; }
+  }
+</style>
+</head>
+<body data-page="approach">
+<div id="top">
+{{HEADER}}
+
+  <main>
+    <section class="wrap phero phero-sec">
+      <div class="phero-in">
+        <span class="mono eyebrow rise">Our Approach</span>
+        <h1 class="rise">From challenge to <span class="rose">action.</span></h1>
+        <p class="rise">We start with the business challenge — not the technology. Our approach combines insight, strategy and practical guidance to help organizations move from understanding what needs to change to making it happen.</p>
+      </div>
+    </section>
+
+    <section class="wrap how">
+      <div data-reveal class="split">
+        <div><span class="mono eyebrow">How we work</span><h2>A practical approach to transformation.</h2></div>
+        <p>Every engagement is different, but our way of working follows the same principle: understand first, prioritize what matters and turn recommendations into practical action.</p>
+      </div>
+    </section>
+
+    <section id="method" class="method-sec">
+      <div class="wrap">
+        <h2 data-reveal>Our methodology</h2>
+        <div class="method">
+          <span class="hline" aria-hidden="true"></span>
+          <span class="vline" aria-hidden="true"></span>
+          <div data-reveal class="mstep">
+            <div class="m-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></div>
+            <div>
+              <div class="m-label"><span class="num">01</span><span class="mono">Discover</span></div>
+              <h3>Understand before acting.</h3>
+              <p>We begin by understanding the business context, current processes, customer needs, team realities and transformation priorities.</p>
+              <ul><li><span class="dot"></span>Business objectives</li><li><span class="dot"></span>Current processes</li><li><span class="dot"></span>Customer and employee needs</li><li><span class="dot"></span>Challenges and friction</li><li><span class="dot"></span>Existing tools and ways of working</li></ul>
+            </div>
+          </div>
+          <div data-reveal class="mstep">
+            <div class="m-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 12h6M9 15.5h6M9 8.5h2.5"/></svg></div>
+            <div>
+              <div class="m-label"><span class="num">02</span><span class="mono">Strategize</span></div>
+              <h3>Turn insight into direction.</h3>
+              <p>We translate what we learn into clear priorities, practical recommendations and an actionable path forward.</p>
+              <ul><li><span class="dot"></span>Opportunity identification</li><li><span class="dot"></span>Prioritization</li><li><span class="dot"></span>Recommendations</li><li><span class="dot"></span>Future-state direction</li><li><span class="dot"></span>Actionable roadmap</li></ul>
+            </div>
+          </div>
+          <div data-reveal class="mstep">
+            <div class="m-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"/><circle cx="12" cy="12" r="6.3"/></svg></div>
+            <div>
+              <div class="m-label"><span class="num">03</span><span class="mono">Transform</span></div>
+              <h3>Move from plans to action.</h3>
+              <p>We support transformation initiatives by helping structure requirements, align stakeholders, coordinate priorities and guide projects through execution.</p>
+              <ul><li><span class="dot"></span>Business requirements</li><li><span class="dot"></span>Project planning</li><li><span class="dot"></span>Stakeholder alignment</li><li><span class="dot"></span>Implementation coordination</li><li><span class="dot"></span>Delivery guidance</li></ul>
+            </div>
+          </div>
+          <div data-reveal class="mstep">
+            <div class="m-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="2.8"/><path d="M3.5 19c.4-3.1 2.7-5 5.5-5s5.1 1.9 5.5 5"/><circle cx="16.5" cy="9.5" r="2.2"/><path d="M15.2 14.3c.4-.1.9-.2 1.3-.2 2.3 0 4 1.6 4.3 4.4"/></svg></div>
+            <div>
+              <div class="m-label"><span class="num">04</span><span class="mono">Enable</span></div>
+              <h3>Build capability for lasting change.</h3>
+              <p>Transformation only creates value when people can adopt it. We help teams build the knowledge, confidence and ways of working needed to sustain change.</p>
+              <ul><li><span class="dot"></span>Practical training</li><li><span class="dot"></span>Team enablement</li><li><span class="dot"></span>Adoption support</li><li><span class="dot"></span>Knowledge transfer</li><li><span class="dot"></span>Continuous improvement</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="partner-sec">
+      <div class="wrap">
+        <div data-reveal class="split">
+          <div><span class="mono eyebrow">How we partner</span><h2 class="h2-sm">Built to work with your team.</h2></div>
+          <p>We work alongside your teams throughout the engagement — bringing structure, outside perspective and practical guidance while keeping your people close to the decisions that shape the transformation.</p>
+        </div>
+        <div class="partner">
+          <div data-reveal class="pcol">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="2.8"/><path d="M3.5 19c.4-3.1 2.7-5 5.5-5s5.1 1.9 5.5 5"/><circle cx="16.5" cy="9.5" r="2.2"/><path d="M15.2 14.3c.4-.1.9-.2 1.3-.2 2.3 0 4 1.6 4.3 4.4"/></svg>
+            <h3 class="mono">Collaborative</h3>
+            <p>We work with the people closest to the challenge, bringing together the right perspectives throughout the engagement.</p>
+          </div>
+          <div data-reveal class="pcol">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12.2l2.6 2.6L16 9.4"/></svg>
+            <h3 class="mono">Practical</h3>
+            <p>Recommendations are designed around your organization’s reality, resources and priorities — not theoretical frameworks.</p>
+          </div>
+          <div data-reveal class="pcol">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/><path d="M4 12h5M13 12h7"/><circle cx="11" cy="12" r="2"/></svg>
+            <h3 class="mono">Flexible</h3>
+            <p>The scope and level of support adapt to the challenge, whether you need focused guidance or support across a broader transformation initiative.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div data-reveal class="chips-sec">
+        <span class="mono eyebrow">What you can expect</span>
+        <h2>Clarity at every step.</h2>
+        <div class="chips">
+          <span><span class="dot"></span>Clear priorities</span>
+          <span><span class="dot"></span>Actionable recommendations</span>
+          <span><span class="dot"></span>Structured roadmaps</span>
+          <span><span class="dot"></span>Hands-on guidance</span>
+          <span><span class="dot"></span>Knowledge transfer</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="endcard-sec">
+      <div data-reveal class="endcard">
+        <div>
+          <h2>Start with the challenge.</h2>
+          <p>Tell us what you’re trying to improve, explore or transform. We’ll start by understanding where you are today.</p>
+          <a href="contact.html" class="cta cta-rose">Let’s Talk <span class="arr2" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{{FOOTER}}
+</div>
+{{SCRIPTS}}
+</body>
+</html>

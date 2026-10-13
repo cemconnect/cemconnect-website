@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Services — CEM Connect</title>
+<meta name="description" content="CEM Connect helps organizations adopt AI with purpose and transform customer experiences through practical strategy, clear priorities and actionable guidance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #17140f; --paper: #f4f2ee; --rose: #D4537E; --rose-dk: #b8406a; --rose-lt: #e26894; --muted: #4a453e; --sub: #6b655d; --faint: #a8a29a; --line: rgba(0,0,0,0.14); }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Manrope', system-ui, sans-serif; background: #fff; color: var(--ink); -webkit-font-smoothing: antialiased; }
+  #top { overflow-x: hidden; }
+  a { color: var(--ink); text-decoration: none; }
+  a:hover { color: var(--rose); }
+  button { font: inherit; }
+  ::selection { background: rgba(212,83,126,0.18); }
+  h1, h2, h3 { font-family: 'Manrope', system-ui, sans-serif; }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding-left: clamp(20px,4vw,44px); padding-right: clamp(20px,4vw,44px); }
+  .mono { font-family: 'Space Grotesk', monospace; letter-spacing: 0.16em; text-transform: uppercase; }
+  .num { font-family: 'Space Grotesk', sans-serif; font-weight: 500; }
+  .rose { color: var(--rose); }
+  .eyebrow { display: block; font-size: 11.5px; font-weight: 500; color: var(--rose); }
+  .h2 { margin-top: 16px; font-size: clamp(30px,3.6vw,48px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.04; text-wrap: balance; }
+  .h2-sm { margin-top: 18px; font-size: clamp(26px,3vw,40px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.12; text-wrap: balance; }
+  .lead { font-size: 16px; line-height: 1.6; color: var(--muted); text-wrap: pretty; }
+  .dot { flex: none; width: 4px; height: 4px; border-radius: 50%; background: var(--rose); }
+
+  @keyframes ccrise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .rise { animation: ccrise .7s cubic-bezier(.2,.7,.2,1) both; }
+  [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
+  [data-reveal][data-in] { opacity: 1; transform: none; }
+
+  /* Header */
+  .hdr { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.86); backdrop-filter: saturate(180%) blur(14px); -webkit-backdrop-filter: saturate(180%) blur(14px); border-bottom: 0.5px solid var(--line); }
+  .hdr-row { height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .logo { display: inline-flex; align-items: center; }
+  .logo img { display: block; object-fit: contain; object-position: left center; }
+  .nav { display: flex; align-items: center; gap: 32px; }
+  .nav a { font-size: 12px; font-weight: 500; padding: 6px 0; border-bottom: 1px solid transparent; color: #55504a; white-space: nowrap; }
+  .nav a[aria-current="page"] { border-bottom-color: var(--rose); color: var(--ink); }
+  .nav a:hover { color: var(--rose); }
+  .hdr-right { display: flex; align-items: center; gap: 14px; }
+  .lang { display: flex; align-items: center; gap: 2px; border: 0.5px solid rgba(0,0,0,0.18); border-radius: 4px; padding: 3px; }
+  .lang button { appearance: none; border: 0; cursor: pointer; font-size: 11px; font-weight: 600; padding: 6px 10px; border-radius: 3px; background: transparent; color: #8a847c; }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+  .btn-book { display: inline-flex; align-items: center; gap: 9px; background: var(--rose); color: #fff; padding: 11px 20px; border-radius: 4px; font-size: 13.5px; font-weight: 600; white-space: nowrap; transition: background .2s ease; }
+  .btn-book:hover { background: var(--rose-dk); color: #fff; }
+  .burger { display: none; align-items: center; justify-content: center; width: 42px; height: 42px; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 4px; background: transparent; cursor: pointer; }
+  .burger span { display: block; width: 16px; height: 10px; border-top: 1.5px solid var(--ink); border-bottom: 1.5px solid var(--ink); position: relative; }
+  .burger span::after { content: ""; position: absolute; top: 50%; left: 0; right: 0; height: 1.5px; background: var(--ink); transform: translateY(-50%); }
+  .mnav { border-top: 0.5px solid rgba(0,0,0,0.12); padding: 12px clamp(20px,4vw,44px) 22px; flex-direction: column; background: #fff; display: flex; }
+  .mnav-links { display: flex; flex-direction: column; }
+  .mnav-links a { padding: 14px 4px; font-size: 17px; font-weight: 500; border-bottom: 0.5px solid rgba(0,0,0,0.08); }
+  .mnav-links a[aria-current="page"] { color: var(--rose); }
+  .mnav .lang { margin-top: 16px; align-self: flex-start; }
+  .mnav .btn-book { margin-top: 14px; justify-content: center; padding: 15px 22px; font-size: 15px; }
+  @media (max-width: 960px) { .desk { display: none !important; } .burger { display: inline-flex; } }
+  @media (min-width: 961px) { .mnav { display: none !important; } }
+
+  /* Buttons */
+  .cta { display: inline-flex; align-items: center; gap: 10px; padding: 17px 30px; border-radius: 4px; font-size: 15px; font-weight: 600; white-space: nowrap; flex: none; transition: background .25s ease, border-color .25s ease, color .25s ease; }
+  .cta-rose { background: var(--rose); color: #fff; }
+  .cta-rose:hover { background: var(--ink); color: #fff; }
+  .cta-ghost { padding: 17px 24px; gap: 8px; border: 0.5px solid rgba(0,0,0,0.28); }
+  .cta-ghost:hover { border-color: var(--rose); color: var(--ink); }
+  .cta-ink { background: var(--ink); color: #fff; padding: 15px 24px; font-size: 14.5px; }
+  .cta-ink:hover { background: var(--rose); color: #fff; }
+  .arr, .arr2 { display: inline-block; transition: transform .25s ease; }
+  .arr2 { color: var(--rose); }
+  .cta:hover .arr { transform: translateX(4px); }
+  .cta:hover .arr2 { transform: translate(3px,-3px); }
+
+  /* Centered page hero (inner pages) */
+  .phero { display: flex; justify-content: center; }
+  .phero-in { width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .phero h1 { margin-top: 22px; font-size: clamp(36px,5vw,64px); line-height: 1.1; font-weight: 600; letter-spacing: -0.035em; text-wrap: balance; animation-delay: .06s; }
+  .phero h1 > span { display: block; }
+  .phero p { margin: 26px auto 0; font-size: clamp(16px,1.35vw,18px); line-height: 1.65; color: var(--muted); text-wrap: pretty; animation-delay: .16s; }
+
+  /* Two-column section head */
+  .split { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px,5vw,80px); align-items: end; }
+  .split > p { max-width: 52ch; font-size: 16px; line-height: 1.65; color: var(--muted); text-wrap: pretty; }
+  @media (max-width: 1024px) { .split { grid-template-columns: 1fr; } }
+
+  /* Dot-separated chips */
+  .chips-sec { padding-top: clamp(56px,7vw,88px); padding-bottom: clamp(56px,7vw,88px); display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .chips-sec h2 { margin-top: 16px; font-size: clamp(22px,2.4vw,32px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
+  .chips { margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px 22px; font-size: clamp(15px,1.4vw,18px); font-weight: 500; }
+  .chips > span { display: inline-flex; align-items: center; gap: 22px; white-space: nowrap; }
+  .chips > span:first-child .dot { display: none; }
+
+  /* Dark rounded closing card */
+  .endcard-sec { padding: 0 clamp(20px,4vw,44px) clamp(72px,9vw,120px); }
+  .endcard { max-width: 1240px; margin: 0 auto; background: var(--ink); color: var(--paper); border-radius: 8px; padding: clamp(56px,7vw,96px) clamp(28px,5vw,88px); }
+  .endcard > div { max-width: 760px; }
+  .endcard h2 { font-size: clamp(28px,3.6vw,46px); font-weight: 500; letter-spacing: -0.025em; line-height: 1.1; text-wrap: balance; }
+  .endcard p { margin-top: 22px; max-width: 54ch; font-size: 17px; line-height: 1.6; color: rgba(244,242,238,0.7); text-wrap: pretty; }
+  .endcard .cta { margin-top: 34px; padding: 16px 30px; }
+  .endcard .cta:hover { background: var(--rose-lt); }
+  .endcard .cta .arr2 { color: #fff; }
+
+  /* Footer */
+  .ftr { border-top: 0.5px solid var(--line); }
+  .ftr .wrap { padding-top: 44px; padding-bottom: 44px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; }
+  .ftr-nav { display: flex; flex-wrap: wrap; gap: 26px; }
+  .ftr-nav a { font-size: 11.5px; color: var(--sub); white-space: nowrap; }
+  .ftr-nav a:hover { color: var(--rose); }
+  .ftr-copy { font-size: 11px; color: var(--faint); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; }
+    html { scroll-behavior: auto; }
+    [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+</style>
+<style>
+  .phero-sec { padding-top: clamp(64px,8vw,112px); padding-bottom: clamp(48px,6vw,72px); }
+  .phero-in { max-width: 940px; }
+  .phero h1 { font-size: clamp(36px,5.2vw,68px); }
+  .phero p { max-width: 56ch; margin-top: 28px; }
+
+  /* Jump links */
+  .jumps-wrap { padding-bottom: clamp(48px,6vw,72px); animation-delay: .24s; }
+  .jumps { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); border-top: 0.5px solid var(--line); border-bottom: 0.5px solid var(--line); }
+  .jump { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 28px 22px 0; }
+  .jump + .jump { padding: 22px 0 22px 28px; border-left: 0.5px solid var(--line); }
+  .jump > span:first-child { display: flex; align-items: baseline; gap: 18px; }
+  .jump .num { font-size: 13px; color: var(--rose); }
+  .jl { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); transition: color .2s ease; }
+  .jarr { font-size: 15px; color: #8a847c; transition: transform .25s ease, color .2s ease; }
+  .jump:hover .jl, .jump:hover .jarr { color: var(--rose); }
+  .jump:hover .jarr { transform: translateY(3px); }
+
+  /* Dark service sections */
+  .svc-sec { background: var(--ink); color: var(--paper); scroll-margin-top: 72px; }
+  .svc-sec .wrap { padding-top: clamp(64px,8vw,104px); padding-bottom: clamp(56px,7vw,88px); }
+  .svc-head { padding-bottom: 36px; border-bottom: 0.5px solid rgba(255,255,255,0.18); }
+  .svc-head h2 { max-width: 22ch; }
+  .svc-intro { margin-top: 22px; max-width: 68ch; display: flex; flex-direction: column; gap: 12px; }
+  .svc-intro p { font-size: 16px; line-height: 1.65; color: rgba(244,242,238,0.8); text-wrap: pretty; }
+  .svc-intro p + p { font-size: 15px; color: rgba(244,242,238,0.58); }
+  .svc { display: grid; grid-template-columns: 30px minmax(0,0.8fr) minmax(0,1.15fr) minmax(0,0.75fr); gap: 16px clamp(20px,3vw,44px); padding: 36px 0; border-bottom: 0.5px solid rgba(255,255,255,0.08); align-items: start; }
+  .svc-ic { display: flex; margin-top: -5px; }
+  .svc h3 { font-size: clamp(18px,1.7vw,21px); font-weight: 500; letter-spacing: -0.015em; line-height: 1.3; color: var(--paper); text-wrap: balance; }
+  .svc-body { display: flex; flex-direction: column; gap: 10px; }
+  .svc-body p { font-size: 15px; line-height: 1.6; color: rgba(244,242,238,0.82); text-wrap: pretty; }
+  .svc-body p + p { font-size: 14px; line-height: 1.65; color: rgba(244,242,238,0.55); }
+  .svc-out .mono { font-size: 10.5px; font-weight: 500; color: rgba(244,242,238,0.45); }
+  .svc-out ul { margin-top: 12px; list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .svc-out li { display: flex; align-items: baseline; gap: 10px; font-size: 14px; line-height: 1.45; color: rgba(244,242,238,0.78); }
+  .svc-out li .dot { transform: translateY(-3px); }
+
+  /* AI Adoption Program */
+  .prog-sec { background: #fbf6f6; border-bottom: 0.5px solid rgba(0,0,0,0.06); }
+  .prog-sec .wrap { padding-top: clamp(64px,8vw,104px); padding-bottom: clamp(64px,8vw,104px); }
+  .prog-sec .split { padding-bottom: 36px; border-bottom: 0.5px solid rgba(0,0,0,0.12); }
+  .phases { position: relative; margin-top: 44px; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(20px,3vw,40px); }
+  .hline { position: absolute; left: 26px; right: 12%; top: 26px; height: 0.5px; background: rgba(212,83,126,0.5); }
+  .vline { display: none; position: absolute; left: 26px; top: 26px; bottom: 40px; width: 0.5px; background: rgba(212,83,126,0.5); }
+  .phase { position: relative; }
+  .ph-ic { width: 52px; height: 52px; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 0.5px rgba(212,83,126,0.45); position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; transition: background .25s ease; }
+  .phase:hover .ph-ic { background: #f7dce6; }
+  .ph-num { margin-top: 24px; font-size: 15px; color: var(--rose); }
+  .phase h3 { margin-top: 12px; font-size: 15px; font-weight: 600; letter-spacing: 0.12em; }
+  .phase p { margin-top: 12px; max-width: 30ch; font-size: 15px; line-height: 1.6; color: var(--sub); text-wrap: pretty; }
+  .prog-cta { margin-top: 44px; }
+  .prog-cta .cta { padding: 16px 28px; }
+
+  @media (max-width: 1024px) {
+    .svc { grid-template-columns: 30px minmax(0,1fr) minmax(0,1.2fr); }
+    .svc-out { grid-column: 2 / -1; }
+  }
+  @media (max-width: 900px) {
+    .phases { grid-template-columns: 1fr; gap: 28px; }
+    .phase { display: grid; grid-template-columns: 52px minmax(0,1fr); gap: 0 22px; }
+    .ph-num { margin-top: 2px; }
+    .hline { display: none; }
+    .vline { display: block; }
+  }
+  @media (max-width: 720px) {
+    .svc { grid-template-columns: 30px minmax(0,1fr); }
+    .svc-body, .svc-out { grid-column: 2 / -1; }
+    .jumps { grid-template-columns: 1fr; }
+    .jump + .jump { border-left: 0; border-top: 0.5px solid var(--line); padding-left: 0; }
+  }
+</style>
+</head>
+<body data-page="services">
+<div id="top">
+  <header class="hdr">
+    <div class="wrap hdr-row">
+      <a href="index.html" class="logo" aria-label="CEM Connect — Home"><img src="data:image/webp;base64,UklGRgIdAABXRUJQVlA4WAoAAAAwAAAA3wEAswAASUNDUMgBAAAAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADZBTFBIkhkAAAHwhu3/I6X9/z1ntrC7gCIizUIEBQu22Ft429s7sXeNie/4luSdKmrUJKZiElKMxhTT7JJImuWd2IORtTcUNYgFEAVUissCy+7OPG7MzM5sPYZ7ETEB5DMZjVZnSByVumrrvtNFDyBpv3Mt59f1r83pH63TaliGGmkZnalp3Khl289beSjPlR36fEHPiFCDlmls0TWJSp779XkrPJIvP/De2ISIYLbxJCgyaVzGsVp4dsnvab3jwpjGEG101+nf5UNBrt5SVS75oLrGxssB0HDk7cfahzVyMGHJ49fkQ2ZDxe2r58yHdm74NH2x5Osfrtu8N/tE7vVSC+cKANuhZYPjDI0X2lZDl/1lg6uOimvH/9zwdurYnq1NJL9Zu4HTFn2y4/C5IisvBfDlG596NKxxQp84/YsCB6S56rz9P7w+vWeEhtwbFD9kwcdZ5ls2CQDWI68Ni2QaHQzJz2SWcpB0luZsen1iBxN5KNtiwNMZv+VaeTGg4eJHj0czjQq6Ds//Xs5DsiJ7bergFuTh2oTHV2Tm2sQA+5W1EyKZRgPNIwt/LoWk4+z61AFh5JVswrhlWbfFAHveurFNGgeY8JmZxTzEK3YvHR5LXqztOOOTM3YRoOFcRl99I4Cu/9f/OCBe9MOcrgbycqZFStrBWhHAcnRpS0bti1p+qhbihesef0RLPpAJ6bFg10MR8KW7J7Lq3rA/yiF++4vRsVrylaYO8/bVCQDntTVRKl6Td645IFq5bWyMjnypKWnhaacAsOSMV+167auCqC17WrSefCwTnPRasQi4woxQVU63sMABIV+U1iqIfDAT0jOzRgC+5kAPFS788/s8hPU7uwWRj2ZD51znIHTkzVTdOv5hg5Ave8bAkO9mozY0CMCXv2VQ1dgRZ3gIHX8nko9nZ1bzENZvjGXUM+NT1yDkLe9oyfe3ybYJ4NjZXauSMeGLSyC0Xx1BftH4wQMeALhDQ4NUMSbmrXIILXsSGf9AuhkFDgiPPWFSwTRt0isgLFsbQX5TO+CwVYDc6cGqlyZhtRUAuIIlYeRH2Q7bKgW4MD1Y5dIkrLYCgPP8k6HkV5m2a0oFuDA9WNVi4j61AoA9Z1Iw+dtWbxUKkDvDpGIxsekWALD9NdZA/jd6yQ0BLk41qFfhKysAoP6PEUbyx1Fp1wU4N06rVhlfLgWAhj9TdOSfo9JuCHBsIKNOsXMLAcCePVJH/joq7aaAPxCnTj12FQC4Y2OM5L8jV94FAOdPIWpU0kkA4HMnG8ift8y4DwD2L1Woprt5wa35weTf22yoAQDLYtVJ82k9AJQvb0p+nmm31w4AhcPVpifvAUDNumbk95lOV3kAzpwodanzZR6AfV8MBYDsY2UAUL9dVQre1QCAz+/MBAKkeb4WAO69oiYteQAANeMZCgz1WRwA/kyietT3CgA4V1PA2KQMABw/a9SiZj83CE4ZAgfqVg8AZUtZdUj74h0AqEimQPJNJwA+O1kd6pHDA2hIo4Ay5CQA1H0ZrAaFfPIQAA4GBRZMn/sAcGkCo/6w4y4AQHl/JrAg4yoOgGNzjPoT830DAEe6kQJMpu1ZACh+hlV7NLPyAeBMOybQoKDptQC4HUlqT/xmBwDrfAMFnq2yAKDyRZ26o3u6EAD2tKEAVDvyHgB+Z1d1J2ELB6ByalAgQjFfAkBVqk7N0cy4BQA74igg1QwvBMD/3kXNaf2VE8CDqUGBCUV+CACVszTqDTO2AAAy4ylAZcfdAcBvbafeRLznAFA5Ux+oUOwaACgbpd70PQkAuztTwKqZVQGAey9CrTEttAGoe84QuFDbjQBws59aE58JAMcGUgCrW+QE4JioVWeYIQ8E6WGBDPXaBwD726kzYSsAoHAKBbSmVQJLH3Wm/SFBVofAhuaXAsB8oxrDDqkHUL9MF+DEbRWcjVdjwlYCwIVxFODq33cCsHZjVJi4IwD47W0DHZpxDQDmG9QXtlcNgJoVmoAnervgeJT6YnwOAPImksJsSEy7zj179erVo3PbSJMiWqP7g1xgdEZRrUcwQUZRnZR+rRPAwzj1pXmmYFeSIrrY3uNfWpN18GJeXt7Zg9s+/N+YR6O0crSdU90/yQXTkFTRJ/SeEDk1VbhwsBQtLAbApWhUl7ibABpWGxQIffTJNcereLjKPfgrY0Yno2vBqXD/CRdifoDo7W6M+7TP3oaQW+dC4l4A+MqktmhSOAAlz5JsY5+l+yqgIF/6c2oHvdfhB737uv/NyzNtF9wIU1uC0gDg9DA5bJvn91ugdPlP08IZb7NOdFvwqkrIYz+2AqgNV1tCfhTsbCVDN3jDXbiRy3v7EdbLcCbcTczY81CApuYD4PsxKkvYdQC2dVrX9DP+dsC9FT8ksl7mfMdNMd/aFIk/DACfalSW9nYAZWnksu6FK3B73Y8JjHehrJdbtP8phCIhuwQ5WnWFeQIArk5y7fnbcJkvyc78Yt26b3fn2VxB/WcmWYV5imcqw/2idUe3XZwymjVWgH9Xo65oVgjM3V2aVgJXCzfOG5wc3zI2tnVS7/Hvn7VLFY/Xynq+l+IdlUHVAjcYl1RDGeq4tca5J55xX/Meo2bOnTOqq95tLfr8e9bcGaM6MYGSNrrv+NlzJ/2rvc6jtFsF/2/mSpd8uFiyOqWVgSFJbUS3Fy+KXX7cSLJGkge6xp2KUowZcRZKsXF9+sez5Oa4/2w5nldQVFxckGf+YqLJDY8szDx55UZRcVHBxZyPxuiVG3fAbDavT2RkTDlgNpvNPRl5Lb8xm80HI+X03WE2m83dldhmVvSIYtqkl7JOX7lZXHwrP/fAu4O0ciI2mBXXnQFg38i6EPwnJ2XfO7a5hlxnQvp8ZwFweUwQeR2saxRr8YFdMU9s/dqZ8noektaSv2frFIr/4OI9Gw9JS/HBKaxS8x8CqP0wUsbzFgAYyspLOA6A22eQMbIAAB5T4jIUbVBIk/TZ1fsNkHRWF+4eIiPmLBTXVwOoWkUuvmKBpPX7JB3J18SsuINjKXryAfy1AQppppfBa3Qjjlo4uO68/0tHJYxTzll5uO4oz+riDtT8x+RBsH/G+hz9wuu1PFy3l34c6iHRPIA7L7gQm89LWL+NYUlJJmTpr4M15AvQkKVVpt1W3mtCFlQ6Id9+NEVes6U1HOQ7To5h3ICqQRoPQu0CX6P5spaH/NpfmnpGPwAomOLC6xaI23+NIaW1OoZ8A+7+TxH90xy8xfSME+J88bEfD9/kRcDvTpAT/r4T4vYLB3b9VcKLgM+byrgB99ozHoTKxzzIVlQos0CR3ziI1+Uf3JN91ykC2w6dR0wVXEqRan4Jkuf6kmd6F3coWgGmdy68RTsSos68xW1YIqJmz91wAvyDN0imYR6EvNP8ZHMSJn9czUF4dJA7cLKFJ+HWI55zqgm5nf0cQr42e14MCTull3IAf/vfpGjyJUFGKEk+LzjdWWpuqcT95eQH8PAjrbymi+EtTFKZgCt9J5qkDUssXNHzJJNJ5gVcwbOhJB2+pU6A76Lcga9NnuTMifQhU2wC59UFRpKOy6zjCweRZ6QLjkZLsFvqxbijMb7NKYZzQ2Rph1eKWRs8zvQpAPAF8zTkqn7cmRdIbtMTAOC8MIlcDnm1RmBZpHUHntd5EGq/C/MZzS7zAJynHiPX37s0gDzkW8HhEInosxCveoN8W0mFWMOGcDmxGyBq33RBGTYiITm5XXNl2kNY+hLJ1IaRXKYPhAVzSGbEZw4A+CnJLRjHehDuLQ/2FUvqAHBXhpPcKPKUTAD8HyQ59JpEQQ8fd/QNpwgK/6t1LWiGQ4Q/O3WvIqa+ay45nFdXdzcooHlVYPvaJEdB3TGBZRUjhzocF9SlsgpZHILqPoxnWDgAuD4zyDcYj3MAHr5KHivvMAD7T1Kpd8Wcf+m84PleynbWKdT8pBj3eweXmPhTEK16IU4R4+TLPISFU1l5xmrB5fHkdgOEh+NJtm6KAwBWBiv00zUOAH+pk2cczOUB4EyKxif0LwPA5UZ6TzYA2xap96vE6taRFxTmKftLC4W0/3oogqo3Q10xLoWo8/dukUowo3Mhzhf2lhcOANwOjfuSBA0bGHnUJ1+Q1VGhaYvu8ADsO1p7xHejbwkcf3RnPeFMtMl1BZY/BFCfTt5zAkD9D1Lf1opVL/IGpS/EKKVfL4YTwxkp5tF7YtdnsoqEbnZKoCFLXqKgfj25f6ngdiopGJkhuDlWKcOqhwBQ82Ezj2CfqwAA6/ftPKH4tcWua+R9Vw/gYYoX5QOoWSuV5RCrmOv7mPZ5YravWkuZNkO0bl0MKdL1EKT5i01kjRaULfaA3wSnOyvBzuAB2OcopYv4wQYA918M8gQyflAPAGVvRXmAbL283XYAVXFeVAjg4cdS+yD+YLrvI/0CuwiK5uolJjhFePMQUuaJiy6gIFHWFMH1qR6QLTgcrARN4gDgacUocR8PgL85U+MJTNQGBwAULAjxvsNOAJUtAjEm9hcx7vcuYs1PQfT+CkNAQoP+AQDn6WGMBxDbeQ8HAGeeCPJ7+QBq1kplOcQq5voB0g4tEYFlaZiAfReijt0dSaGuh1zgLzaRNVpQttgDfhOc7qwEO4MHYJ/jBnriIQDU/dbNE0g/4oyAP9ifdZf19AnXdfJ22wFUxXnRCQD1P0h9WytWvcgbqu8rmx2lHDV7RwznBzFE1KlMrGA2o1ToZqdUQxbJThTUr/eApYK7LykRmQEAN8e6gxY2AED15zGeQCFPFgJA/baOo910ZdQg1xl539UDeJjiRdkAbFuk3q8Sq1vnDStGKzswyA1sl0Ni9q9aExl+4UTqNoSTUszoXAn+Vm954QJuh8Z9SQLHZkaBPvmCrI5uMb7LAUD5iuWeQM2WVgNAdcZTbjrVhNy8/CGA+nQvOgzA/pNU6l0x5186LxhJHiiHjPNqRFD+uI4mVkPIn+lDipFx8mVepHAqK89YDQCXx7vPIEB2ojzdFIdgZbBbqOUWHgBuna/zBGr5sQ0Ayn8u867+ZQC43EjvyQTA/yE19JoYCnr4BabNejH+YPvwE5xI5bs6N5Cp7ye5DufV1d0NJF/zqsD2tcltumMCy/uMrA7HAaAulXUP2/WUgHNwHsF22s4BgMXhXcbjHADLCu/5FgAOh0hEn5WoesMvkHbUFRHYXl5dA6Hzr2hyB7HN45OT2zUnRdsLUPqSnKA4WUwfAQrmyIn4zCH4KYncQ9p/lcBFt5F2yBGBuPfQkjoA3NXhshI8Jl1wNFqC3VQvxh2N8QvU9HUx3KvhRe5MZtzjVtMHAr5gnsYl/ROXXpBDTU8InDnDXAt5tQYA6pZq3UVBU2s9iPSz831Bs8s8AOepx1zTvndjkKc8LzjdWYLmlIrh/nL/wHTbJSbZ8IuOvIZJLAMA7n56tAvGt2v4u6/JYZJ5AHBe+W+oC+Fb6iD8PorcRqHPOzyI9Ivu+QCaYgMA59UFRhfidtTxhYM8ZKrgUopU80sSONfXL5B2QZVL/M025D2kHSkAnHmL27CC6OduOAE8eEMGGeYJwDuzZ4eLJH9czUF4fAh5ALX6gvcgCvms3gewnwvA12bPixHpkl7KAXzJJM/oJyiYIkWvWyTsv8YoptczPoSivuBdqU8nbyLTM04BAL742I+Hb/IQ5XfGyaDw950Qt184sj/7PsT5y1MZj6Bu+3gPopY/2t1lKyqUeSNVHtH/OYjX5R/em1PqhKhth84jonkAd15wITafF4P12xhWESZ06a8pWh9CY865wJ/XeReF/LfSKeK6/WgKyW62tIYTcd1x+nGGPIOG5/EeRH2OON0k37lUCcP3tbyI69afm5JH6KsBVK1ygV6xSMD6fZJOAU3Mm2W4MibIhxjetkrVjiYvo6AxORZOhrN8e3tS0DjlnJWX4SjP6kLKKsLOLuE9iCZf5ryPgp69UcvLsN9dZSLP0J0BYN/IuhD8Jy8B+96xzTUymJC+G6wALo81+g7q9LtTjM8iryOKW3mmvJ6Xst7+e7aOlI3/4GK5jZeyFB+cwpLnkHHRA0+ipXd47yNNp8/+edAg5ay+9Vs/UlqedisA/L+ZC9T9hhRQsjqllYGR0kZ0e/EiRPOnmHwH+98isTut3cfG9ekfz7qHmLj/bDmeV1BUXFyQZ/783yZS/pGFmScuXy8qLiq4mJMxWk+KjztgNpvNQ7WuUau3c8xmc09GXstvzGazebkcTXq22WzursQ2s6JH5yhDpOu0KOv0lZvFxTf/yT3w7gCGFI/fajabzf8zSWlWCMzdXaFpd10ACjfOG5wc3zI2tnVS7/Hvn7VDsni8VtbzvZTv4CYKX18nsK8g93XcWuPcE8+4R9i8x6iZc+eM6qond4f3Gj1z7oxRnRgKkLXRfcfPnjthcDsdeTI7XnB1kkv0SokrAF+SnfnFunXf7s6zwdX6z0yyCvOU3+wuGnaGB3DU4D7NGivAv6txn7rIJNkBlKW5pnvlmksK1/6YwMhy599u0y8/dv786RGM+0J2AcARrbpCYdcB2NZpXSLDvGMON937JpElH0JRKWPGDNOR++IPCzI0KkvIjwCws5VrpB+6udwdztzXWjHkUxSN+FOJqfkAuH6MyhKUJjg9TAZp4l8+ZFHs7tZJTUnad4X9XwH2YyuA2nBSWTUpHICSZ+UQmfq9ur9CCf72j8+005EfaLJHAdN2ALgRprZQ3E0ADasNsohCH5239ngV7xJXvj99UpKBXPYriXsFX5lUl+aZALArSQEifWzv8S+tyTp4MS8v7+zBbR+kjuoWwZJMTfxkD0yRMvScLJ7CuE83YLLopO4uLCwGwKVoVBfjc4K8iYoQERsS065zz169evXo3DbSSH5dv9YJ4GEcqa5s3xoANSs0CgWS0dsB4HiU+kJxRwDw29sGPDOuCeYbVJiwlQBwYVygo3/fCcDajVFh2CH1AOqX6QKcuK0AcDae1Nj2hwAgq0OAM79UMN+oyoStEBROCWxMqwDA0odUWWbIAwBIDwtoeu0T7G+nzlB8puDYwEBGt8gJwDFRq9KYFtoA1D1rCGDabgSAm/1Ire17EgB2dgpcNLMqAHDvRag2Ee85AFTO1AcssWsAoGwUqbbM2AIAyIwPVNhxdwDwWxLUG2r9lRPAg6lBAUpkBgBUTmdUHM2MWwCwIy4w0QwvBMD/3oXU3IQtHIDKqUEBScyXAFCVqlN1dE8XAsCeNoGIduQ9APzOrqTuxm92ALDONwQgrbIAoPJFncqjmZUPAGfaMQFH0PRaANyOJFJ7Y75vAOBINwYaTNuzAFD8DKv6sOMuAEB5fybAMGZwABybY0j9DfnkIQAcDAosmD4VAHBpAqMCUY8cHkBDWmARchIA6r4MJjVY++IdAKhIDijSnQD4wx1IHW72cwMAnDIEEN3qAaBsCasSUd8rAufqwKFJGQA4ftaQarzkAQDUjGcCBH0WB4A/k0jqcfCuBgB8fmcmINA8XwsA914hNbnzZR6AfV9MIMA+VgYA9dtJXX7yHgDUrGvm/5hOV3kAzpwolUnzaT0AlC9v6u+YdnvtAHBrOKnNTXfzAHBrfrCfa7OhBgAsL5P6nHRSwOdONvi1lhn3AcD+JanRj10FAO7YGKMfi1x5FwCcP4WoUuzcQgCwZ4/U+a2otJsAwO+NI3Xa+HIpADT8maLzU1FpNyA81o9RqSh8ZQUA1P850uiXotKuQ3hunJbUaiY23QIADdljDX4oeskNCC9ONZB6zcR9agUAe86kYL/T6q1CCHNnmEjN1iSstgKA8/yTof6FabumFMIL04NJ3dYkrLYCAFewJMyfsB22VUJ4YXowqd2aNukVEJatjfAf2gGHrRDmTg8m9ZuJeatcAMueRMZP6GYUOCA89oSJ1HAmfHGJAParI/yD8YMHPABwh4YGkUpufOqaALzlHa0faJNtg9Cxs7uWVHN2xBkeQsffib6OnVnNQ1i/MZYhNb3jHzYB+LJnDIwPY6M2NEDIl79lIJU9/PP7PIT1O7sF+So2dM51DkJH3kxS33ULCxwC8EVprYJ8ERPSM7MGQr7mQA9S5XvtqxIAtuxp0XpfwwQnvVYMUa4wI5RU+ibvXHMIgMptY2N0PsWUtPC0E6KWnPGk4g/7o1wEuP3F6FitzzB1mLevDqLOa2uiSNWPWn6qVgQoXPf4I1pfwIT0WLDrIUT50t0TWVL5df2//schAhT9MKerwduYFilpB2shbjm6tCVDqj8TPjOzmBcBKnYvHR7rTdqOMz45Y4d4w7mMvnpqFNQ8svDnUjHAcXZ96oAw72ATxi3Lug1Je966sU2o0VDX4fnfy3kRABXZa1MHt/A0bcLjKzJzbZC0X1k7IZKhxkRD8jOZpZwY4CzN2fT6xA4mT2FbDHg647dcKw9J24WPHo9mqLFRnzj9iwKHGACuOm//xpXTe0Zo3BQUP2TBx1nmWza4aD2yYkgkQ42R2lZDl/1lkxA6K64d/3PD26lje7Y2KdCs3cBpaZ/sOHyuyMrDRb5841OPhlGjJROWPH5NvguiDRW3r54zH9q54dP0xZKvf7hu897sE7nXyywcXLcdWjY4zkCNm9rortO/y3dJkqu3VJVLPqiusfGQ33Dkjcfah1FjaFBk0riMY7Vy3F7ye1rvuKYMNZrqmkQlz/36vNUz+PK974xNiAhmqZGV0Zmaxo1atv28lXcDV3bo8wU9I0INWoYaaRmNVmdIHJW6auu+00UPpOx3ruX8uv61Of2jdVoNy5AaD1ZQOCB6AQAAEBsAnQEq4AG0AD5RKJJHI6KhoSBoEHAKCWlu4XdhHMRnugHAAeU7+oHwO/sN+zPs5kyiBD42IvEFR/ljYi8QVH+WNiLxBUf5Y2IvEFR/ljYi8QVH+WNiLxBUf5Y2IvEFR/ljYi8QVH+WNiLxBUf5Y2IvEFR/ljYi8NBinsRZ+IhgHMAKj/LGxF4gqP8sa0Ie+lxgq7GFrofGxF4gqP8sbEXiCo/yxsReIKj/LGxF4gqP8sbEXiCo/yxsReIKj/LGxF4gqP8sbEXiCo/yxsReIKj/LGxF4gqP8sbEXiCo/yvwAP7/8l/AAAABI/53+lQZGM2xdfTSq5wVk6DJ/t3he8yo+vK///g1/7R/s8Mf6M93biK//kaf+Gaqn8/+ciDY1PifzfhUdaUMXktGbCgoxWxvtxX+lq/4a/Oz4X8xJpZf/kp8nIt0303h5bGsWSaaB9sBstqbwOzNI7i+d4cfH/G6UrPFowOvdTLHeZogf676cWC4AAAAAAAA" alt="CEM Connect" width="220" height="56"></a>
+      <nav class="nav desk" aria-label="Primary" data-nav></nav>
+      <div class="hdr-right">
+        <div class="lang desk" role="group" aria-label="Language">
+          <button type="button" class="mono" data-lang="en">EN</button>
+          <button type="button" class="mono" data-lang="fr">FR</button>
+        </div>
+        <a class="btn-book desk" data-book href="contact.html">Book a call</a>
+        <button type="button" class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span></button>
+      </div>
+    </div>
+    <div class="mnav" id="mnav" hidden>
+      <nav class="mnav-links" aria-label="Mobile" data-nav></nav>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" class="mono" data-lang="en">EN</button>
+        <button type="button" class="mono" data-lang="fr">FR</button>
+      </div>
+      <a class="btn-book" data-book href="contact.html">Book a call</a>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap phero phero-sec">
+        <div class="phero-in">
+          <span class="mono eyebrow rise">Our Expertise</span>
+          <h1 class="rise"><span>Two areas of expertise.</span><span>Built around <span class="rose">your business.</span></span></h1>
+          <p class="rise">CEM Connect helps organizations adopt AI with purpose and transform customer experiences through practical strategy, clear priorities and actionable guidance.</p>
+        </div>
+      </div>
+      <div class="wrap jumps-wrap rise">
+        <div class="jumps">
+          <a href="#ai" class="jump"><span><span class="num">01</span><span class="jl">AI Adoption &amp; Strategy</span></span><span class="jarr" aria-hidden="true">↓</span></a>
+          <a href="#cx" class="jump"><span><span class="num">02</span><span class="jl">Customer Experience Transformation</span></span><span class="jarr" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="ai" class="svc-sec">
+      <div class="wrap">
+        <div data-reveal class="svc-head">
+          <span class="mono eyebrow">01&nbsp; AI Adoption &amp; Strategy</span>
+          <h2 class="h2-sm">Make AI practical for your business.</h2>
+          <div class="svc-intro">
+            <p>AI creates opportunities across the business — but meaningful adoption starts with understanding where it can actually make a difference.</p>
+            <p>We help organizations assess their readiness, identify relevant use cases and build a practical path toward AI adoption that aligns with their business priorities and teams.</p>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="13.5" r="7.5"/><path d="M19 19l7 7"/><path d="M13.5 9.5c.3 2 1 2.7 3 3-2 .3-2.7 1-3 3-.3-2-1-2.7-3-3 2-.3 2.7-1 3-3z"/></svg></span>
+          <h3>AI Readiness &amp; Opportunity Assessment</h3>
+          <div class="svc-body">
+            <p>Understand where your organization stands today and where AI could create meaningful value.</p>
+            <p>We assess current AI usage, business processes, organizational readiness and potential use cases to identify the most relevant opportunities and priorities.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>AI readiness overview</li><li><span class="dot"></span>Business process observations</li><li><span class="dot"></span>Prioritized AI opportunities</li><li><span class="dot"></span>Recommended next steps</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="25" r="2.2"/><circle cx="16" cy="16" r="2.2"/><path d="M8.6 23.4l5.8-5.8"/><path d="M17.6 14.4l4.9-4.9"/><path d="M24 4v10"/><path d="M24 4.5h5l-1.6 2.3 1.6 2.3h-5"/></svg></span>
+          <h3>AI Strategy &amp; Roadmap</h3>
+          <div class="svc-body">
+            <p>Turn identified opportunities into a clear and realistic path forward.</p>
+            <p>We help define AI priorities, evaluate potential approaches and structure an actionable adoption roadmap aligned with business objectives and organizational capacity.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Prioritized AI initiatives</li><li><span class="dot"></span>AI adoption roadmap</li><li><span class="dot"></span>Recommended tools and approaches</li><li><span class="dot"></span>Implementation priorities</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="12" r="3.5"/><path d="M4.5 25c.6-4 3.2-6.5 6.5-6.5s5.9 2.5 6.5 6.5"/><path d="M19.5 7.5l5-2.5 5 2.5-5 2.5z"/><path d="M21.5 9v3.2c0 .9 1.3 1.8 3 1.8s3-.9 3-1.8V9"/><path d="M20 25c.3-2.8 1.8-4.8 4-5.6"/></svg></span>
+          <h3>AI Training &amp; Adoption</h3>
+          <div class="svc-body">
+            <p>Help teams understand how AI can support their work and build confidence using it responsibly.</p>
+            <p>We deliver practical training and adoption support tailored to business needs, roles and real workplace use cases.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Practical AI workshops</li><li><span class="dot"></span>Role-relevant use cases</li><li><span class="dot"></span>Usage guidance</li><li><span class="dot"></span>Adoption recommendations</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="prog-sec">
+      <div class="wrap">
+        <div data-reveal class="split">
+          <div><span class="mono eyebrow">AI Adoption Program</span><h2 class="h2-sm">A structured path from exploration to adoption.</h2></div>
+          <p>For organizations looking for more comprehensive support, the CEM Connect AI Adoption Program brings assessment, opportunity identification, strategy and team enablement into one structured engagement.</p>
+        </div>
+        <div data-reveal class="phases">
+          <span class="hline" aria-hidden="true"></span>
+          <span class="vline" aria-hidden="true"></span>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/></svg></div>
+            <div><div class="num ph-num">01</div><h3 class="mono">Assess</h3><p>Understand the organization, current processes, AI usage and readiness.</p></div>
+          </div>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3"/></svg></div>
+            <div><div class="num ph-num">02</div><h3 class="mono">Identify</h3><p>Identify and prioritize practical AI opportunities based on business needs.</p></div>
+          </div>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5h8l4 4v13H6z"/><path d="M14 3.5v4h4"/><path d="M9 12h6M9 15.5h6M9 8.5h2.5"/></svg></div>
+            <div><div class="num ph-num">03</div><h3 class="mono">Strategize</h3><p>Translate opportunities into clear priorities and an actionable adoption roadmap.</p></div>
+          </div>
+          <div class="phase">
+            <div class="ph-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#D4537E" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8.5" r="2.8"/><path d="M3.5 19c.4-3.1 2.7-5 5.5-5s5.1 1.9 5.5 5"/><circle cx="16.5" cy="9.5" r="2.2"/><path d="M15.2 14.3c.4-.1.9-.2 1.3-.2 2.3 0 4 1.6 4.3 4.4"/></svg></div>
+            <div><div class="num ph-num">04</div><h3 class="mono">Enable</h3><p>Build team confidence through practical training, guidance and adoption support.</p></div>
+          </div>
+        </div>
+        <div class="prog-cta">
+          <a href="contact.html" class="cta cta-ink">Discuss Your AI Priorities <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section id="cx" class="svc-sec">
+      <div class="wrap">
+        <div data-reveal class="svc-head">
+          <span class="mono eyebrow">02&nbsp; Customer Experience Transformation</span>
+          <h2 class="h2-sm">Better experiences start with understanding the journey.</h2>
+          <div class="svc-intro">
+            <p>Great customer experiences are built by understanding where customers struggle, what they expect and how the business can respond.</p>
+            <p>We help organizations uncover friction across customer journeys and translate insights into practical transformation priorities.</p>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="10" r="3.5"/><path d="M4 24c.6-4 3.4-6.5 7-6.5 1.6 0 3 .5 4.2 1.4"/><circle cx="22" cy="20" r="4.5"/><path d="M25.3 23.3L29 27"/></svg></span>
+          <h3>Customer Experience Assessment</h3>
+          <div class="svc-body">
+            <p>Build a clearer understanding of the current customer experience and where improvement matters most.</p>
+            <p>We review key interactions, customer journeys and experience gaps to identify friction and opportunities for improvement.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Customer experience assessment</li><li><span class="dot"></span>Key pain points and friction</li><li><span class="dot"></span>Experience improvement opportunities</li><li><span class="dot"></span>Prioritized recommendations</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="8" r="2.2"/><circle cx="26" cy="16" r="2.2"/><circle cx="8" cy="25" r="2.2"/><path d="M8.2 8H20a4 4 0 0 1 0 8h-1.8"/><path d="M23.8 16H12a4.5 4.5 0 0 0 0 9h-1.8"/></svg></span>
+          <h3>Customer Journey Transformation</h3>
+          <div class="svc-body">
+            <p>Turn customer insights into better journeys and more intuitive experiences.</p>
+            <p>We help organizations map and rethink customer journeys, identify improvement opportunities and define future-state experiences aligned with customer and business needs.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Current-state journey analysis</li><li><span class="dot"></span>Future-state customer journeys</li><li><span class="dot"></span>Improvement opportunities</li><li><span class="dot"></span>Transformation roadmap</li></ul>
+          </div>
+        </div>
+
+        <div data-reveal class="svc">
+          <span class="svc-ic"><svg width="30" height="30" viewBox="0 0 32 32" fill="none" stroke="#D4537E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="22" height="22" rx="2.5"/><path d="M9.5 11.5l1.8 1.8 3.2-3.3"/><path d="M17.5 11.5h5"/><path d="M9.5 19l1.8 1.8 3.2-3.3"/><path d="M17.5 19h5"/></svg></span>
+          <h3>CX &amp; Digital Project Management</h3>
+          <div class="svc-body">
+            <p>Turn transformation priorities into structured initiatives.</p>
+            <p>We support CX and digital transformation projects through business requirements, prioritization, stakeholder coordination and delivery oversight.</p>
+          </div>
+          <div class="svc-out">
+            <div class="mono">Key outputs</div>
+            <ul><li><span class="dot"></span>Business requirements</li><li><span class="dot"></span>Project priorities and roadmap</li><li><span class="dot"></span>Stakeholder coordination</li><li><span class="dot"></span>Delivery support</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <div data-reveal class="chips-sec">
+        <span class="mono eyebrow">Where we can help</span>
+        <h2>From friction to better experiences.</h2>
+        <div class="chips">
+          <span><span class="dot"></span>Customer Journeys</span>
+          <span><span class="dot"></span>Digital Onboarding</span>
+          <span><span class="dot"></span>Service Experiences</span>
+          <span><span class="dot"></span>Digital Products</span>
+          <span><span class="dot"></span>Process Improvement</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="endcard-sec">
+      <div data-reveal class="endcard">
+        <div>
+          <h2>Start with the challenge.</h2>
+          <p>Whether you’re exploring how AI could support your organization or looking to improve a customer journey, we start by understanding the business challenge first.</p>
+          <a href="contact.html" class="cta cta-rose">Let’s Talk <span class="arr2" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ftr">
+    <div class="wrap">
+      <a href="index.html" class="logo" aria-label="CEM Connect — Home"><img src="data:image/webp;base64,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" alt="CEM Connect" width="190" height="48"></a>
+      <nav class="ftr-nav" aria-label="Footer" data-nav data-nav-plain></nav>
+      <div class="mono ftr-copy">Canada · France · Middle East &nbsp;·&nbsp; © 2026 CEM Connect</div>
+    </div>
+  </footer>
+</div>
+<script>
+(function () {
+  if (window.CCI18N) return;
+  const D = {
+    // Shared
+    "Home": "Accueil",
+    "About": "À propos",
+    "Our Approach": "Notre approche",
+    "Book a call": "Réserver un appel",
+    "Let’s Talk": "Discutons",
+    "Middle East": "Moyen-Orient",
+    "Canada · France · Middle East": "Canada · France · Moyen-Orient",
+    "Canada · France · Middle East · © 2026 CEM Connect": "Canada · France · Moyen-Orient · © 2026 CEM Connect",
+
+    // Home
+    "Smarter business.": "Une entreprise plus efficace.",
+    "Less complexity.": "Moins de complexité.",
+    "Better experiences.": "Des clients mieux servis.",
+    "We help businesses uncover AI opportunities, improve efficiency and rethink customer experiences with practical strategies built for real-world challenges.": "Nous aidons les entreprises à tirer parti de l’IA, à gagner en efficacité et à repenser l’expérience client, avec des solutions concrètes, pensées pour leur réalité.",
+    "Explore Our Services": "Découvrir nos services",
+    "Sound familiar?": "Ces situations vous parlent ?",
+    "We start where it costs you most.": "Nous partons de ce qui vous freine le plus.",
+    "Real problems, not technology for its own sake.": "Des enjeux concrets, pas de la technologie pour la technologie.",
+    "Rising operational costs": "Des coûts opérationnels en hausse",
+    "Efficiency": "Efficacité",
+    "Repetitive manual processes": "Trop de tâches manuelles et répétitives",
+    "AI adoption": "Adoption de l’IA",
+    "Workflows that slow teams down": "Des processus qui freinent vos équipes",
+    "Friction in customer journeys": "Des points de friction dans le parcours client",
+    "Customer experience": "Expérience client",
+    "Not sure where to start with AI": "L’IA, mais par où commencer ?",
+    "AI strategy": "Stratégie IA",
+    "Our Expertise": "Notre expertise",
+    "Two areas.": "Deux expertises.",
+    "Real business impact.": "Un impact concret.",
+    "All services": "Tous les services",
+    "Less manual work.": "Moins de tâches manuelles.",
+    "More efficiency.": "Plus d’efficacité.",
+    "Identify where AI can simplify operations, reduce inefficiencies and support your teams.": "Identifiez où l’IA peut simplifier vos opérations, réduire les inefficacités et accompagner vos équipes.",
+    "Explore AI Adoption": "Découvrir l’adoption de l’IA",
+    "Better journeys.": "Des parcours plus fluides.",
+    "Understand customer pain points, simplify interactions and improve the journeys that matter.": "Identifiez les points de friction, simplifiez les interactions et améliorez les parcours qui comptent pour vos clients.",
+    "Explore CX Transformation": "Découvrir la transformation CX",
+    "From business challenges": "Du constat",
+    "to action.": "à l’action.",
+    "We work closely with your team to identify opportunities, set clear priorities and support the next steps.": "Nous travaillons main dans la main avec vos équipes pour repérer les opportunités, fixer les bonnes priorités et passer à l’action.",
+    "Discover": "Comprendre",
+    "Strategize": "Définir",
+    "Transform": "Transformer",
+    "Enable": "Accompagner",
+    "Understand": "Analyser",
+    "Prioritize": "Prioriser",
+    "Act": "Agir",
+    "Adopt": "S’approprier",
+    "Discover Our Approach": "Découvrir notre approche",
+    "Cross-Market Perspective": "Perspective multimarché",
+    "Across markets, connected by experience.": "Plusieurs marchés, une même expérience.",
+    "Bringing a cross-market perspective to AI adoption and customer experience transformation.": "Un regard nourri par plusieurs marchés, au service de l’adoption de l’IA et de l’expérience client.",
+    "Let’s find your": "Trouvons ensemble",
+    "quickest win.": "par où commencer.",
+    "A 30-minute call to talk through your priorities and where to start.": "30 minutes pour faire le point sur vos priorités et définir les premières étapes.",
+
+    // Services
+    "Two areas of expertise.": "Deux domaines d’expertise.",
+    "Built around": "Au service de",
+    "your business.": "votre entreprise.",
+    "CEM Connect helps organizations adopt AI with purpose and transform customer experiences through practical strategy, clear priorities and actionable guidance.": "CEM Connect aide les organisations à adopter l’IA de façon réfléchie et à transformer leur expérience client, avec une stratégie pragmatique, des priorités claires et des conseils directement applicables.",
+    "AI Adoption & Strategy": "Adoption et stratégie IA",
+    "Customer Experience Transformation": "Transformation de l’expérience client",
+    "01 AI Adoption & Strategy": "01 — Adoption et stratégie IA",
+    "02 Customer Experience Transformation": "02 — Transformation de l’expérience client",
+    "Make AI practical for your business.": "Rendre l’IA concrète pour votre organisation.",
+    "AI creates opportunities across the business — but meaningful adoption starts with understanding where it can actually make a difference.": "L’IA ouvre des possibilités partout dans l’organisation — mais une adoption réussie commence par savoir où elle peut vraiment faire la différence.",
+    "We help organizations assess their readiness, identify relevant use cases and build a practical path toward AI adoption that aligns with their business priorities and teams.": "Nous aidons les organisations à évaluer leur maturité, à identifier les usages pertinents et à construire un chemin réaliste vers l’adoption de l’IA, en phase avec leurs priorités et leurs équipes.",
+    "Key outputs": "Livrables clés",
+    "AI Readiness & Opportunity Assessment": "Évaluation de la maturité et des opportunités IA",
+    "Understand where your organization stands today and where AI could create meaningful value.": "Savoir où en est votre organisation aujourd’hui et où l’IA peut réellement créer de la valeur.",
+    "We assess current AI usage, business processes, organizational readiness and potential use cases to identify the most relevant opportunities and priorities.": "Nous analysons vos usages actuels de l’IA, vos processus, la maturité de votre organisation et les cas d’usage possibles pour faire ressortir les opportunités et priorités les plus pertinentes.",
+    "AI readiness overview": "État des lieux de la maturité IA",
+    "Business process observations": "Analyse des processus",
+    "Prioritized AI opportunities": "Opportunités IA priorisées",
+    "Recommended next steps": "Prochaines étapes recommandées",
+    "AI Strategy & Roadmap": "Stratégie et feuille de route IA",
+    "Turn identified opportunities into a clear and realistic path forward.": "Transformer les opportunités identifiées en une trajectoire claire et réaliste.",
+    "We help define AI priorities, evaluate potential approaches and structure an actionable adoption roadmap aligned with business objectives and organizational capacity.": "Nous vous aidons à définir vos priorités, à comparer les approches possibles et à bâtir une feuille de route d’adoption réaliste, alignée sur vos objectifs et vos capacités.",
+    "Prioritized AI initiatives": "Initiatives IA priorisées",
+    "AI adoption roadmap": "Feuille de route d’adoption de l’IA",
+    "Recommended tools and approaches": "Outils et approches recommandés",
+    "Implementation priorities": "Priorités de mise en œuvre",
+    "AI Training & Adoption": "Formation et adoption de l’IA",
+    "Help teams understand how AI can support their work and build confidence using it responsibly.": "Aider les équipes à comprendre ce que l’IA peut apporter à leur travail et à l’utiliser en confiance, de façon responsable.",
+    "We deliver practical training and adoption support tailored to business needs, roles and real workplace use cases.": "Nous proposons des formations pratiques et un accompagnement adaptés à vos besoins, aux différents métiers et aux situations réelles de travail.",
+    "Practical AI workshops": "Ateliers pratiques sur l’IA",
+    "Role-relevant use cases": "Cas d’usage par métier",
+    "Usage guidance": "Bonnes pratiques d’utilisation",
+    "Adoption recommendations": "Recommandations d’adoption",
+    "AI Adoption Program": "Programme d’adoption de l’IA",
+    "A structured path from exploration to adoption.": "De l’exploration à l’adoption, un parcours structuré.",
+    "For organizations looking for more comprehensive support, the CEM Connect AI Adoption Program brings assessment, opportunity identification, strategy and team enablement into one structured engagement.": "Pour les organisations qui souhaitent un accompagnement complet, le Programme d’adoption de l’IA de CEM Connect réunit diagnostic, identification des opportunités, stratégie et montée en compétences des équipes au sein d’une même mission.",
+    "Assess": "Évaluer",
+    "Identify": "Identifier",
+    "Understand the organization, current processes, AI usage and readiness.": "Comprendre l’organisation, ses processus, ses usages de l’IA et sa maturité.",
+    "Identify and prioritize practical AI opportunities based on business needs.": "Repérer et hiérarchiser les opportunités de l’IA les plus utiles pour votre activité.",
+    "Translate opportunities into clear priorities and an actionable adoption roadmap.": "Traduire les opportunités en priorités claires et en une feuille de route réaliste.",
+    "Build team confidence through practical training, guidance and adoption support.": "Donner confiance aux équipes par la formation, le conseil et un accompagnement au quotidien.",
+    "Discuss Your AI Priorities": "Parlons de vos priorités IA",
+    "Better experiences start with understanding the journey.": "Une meilleure expérience commence par la compréhension du parcours.",
+    "Great customer experiences are built by understanding where customers struggle, what they expect and how the business can respond.": "Une expérience client réussie se construit en comprenant où vos clients rencontrent des difficultés, ce qu’ils attendent et comment y répondre.",
+    "We help organizations uncover friction across customer journeys and translate insights into practical transformation priorities.": "Nous aidons les organisations à mettre en lumière les points de friction de leurs parcours clients et à en tirer des priorités d’action concrètes.",
+    "Customer Experience Assessment": "Évaluation de l’expérience client",
+    "Build a clearer understanding of the current customer experience and where improvement matters most.": "Avoir une vision claire de l’expérience client actuelle et des améliorations prioritaires.",
+    "We review key interactions, customer journeys and experience gaps to identify friction and opportunities for improvement.": "Nous analysons les moments clés, les parcours et les écarts d’expérience pour identifier les points de friction et les pistes d’amélioration.",
+    "Customer experience assessment": "Évaluation de l’expérience client",
+    "Key pain points and friction": "Principaux points de friction",
+    "Experience improvement opportunities": "Pistes d’amélioration de l’expérience",
+    "Prioritized recommendations": "Recommandations priorisées",
+    "Customer Journey Transformation": "Transformation des parcours clients",
+    "Turn customer insights into better journeys and more intuitive experiences.": "Faire de la connaissance client des parcours plus fluides et plus intuitifs.",
+    "We help organizations map and rethink customer journeys, identify improvement opportunities and define future-state experiences aligned with customer and business needs.": "Nous aidons les organisations à cartographier et repenser leurs parcours clients, à identifier les pistes d’amélioration et à définir l’expérience cible, en conciliant attentes des clients et objectifs de l’organisation.",
+    "Current-state journey analysis": "Analyse du parcours actuel",
+    "Future-state customer journeys": "Parcours clients cibles",
+    "Improvement opportunities": "Pistes d’amélioration",
+    "Transformation roadmap": "Feuille de route de transformation",
+    "CX & Digital Project Management": "Gestion de projets CX et numériques",
+    "Turn transformation priorities into structured initiatives.": "Transformer les priorités en projets structurés.",
+    "We support CX and digital transformation projects through business requirements, prioritization, stakeholder coordination and delivery oversight.": "Nous accompagnons vos projets CX et digitaux : expression des besoins, priorisation, coordination des parties prenantes et suivi de la mise en œuvre.",
+    "Business requirements": "Expression des besoins",
+    "Project priorities and roadmap": "Priorités et feuille de route du projet",
+    "Stakeholder coordination": "Coordination des parties prenantes",
+    "Delivery support": "Suivi de la mise en œuvre",
+    "Where we can help": "Nos champs d’intervention",
+    "From friction to better experiences.": "Moins de friction, de meilleures expériences.",
+    "Customer Journeys": "Parcours clients",
+    "Digital Onboarding": "Intégration des nouveaux clients",
+    "Service Experiences": "Expériences de service",
+    "Digital Products": "Produits numériques",
+    "Process Improvement": "Amélioration des processus",
+    "Start with the challenge.": "Parlons de vos priorités.",
+    "Whether you’re exploring how AI could support your organization or looking to improve a customer journey, we start by understanding the business challenge first.": "Que vous exploriez ce que l’IA peut apporter à votre organisation ou souhaitiez améliorer un parcours client, nous commençons toujours par comprendre votre enjeu.",
+
+    // Approach
+    "From challenge to": "De l’enjeu à",
+    "action.": "l’action.",
+    "We start with the business challenge — not the technology. Our approach combines insight, strategy and practical guidance to help organizations move from understanding what needs to change to making it happen.": "Nous partons de votre enjeu — pas de la technologie. Notre approche allie analyse, stratégie et accompagnement concret pour vous aider à passer de ce qui doit changer à ce qui change vraiment.",
+    "How we work": "Notre façon de travailler",
+    "A practical approach to transformation.": "Une approche pragmatique de la transformation.",
+    "Every engagement is different, but our way of working follows the same principle: understand first, prioritize what matters and turn recommendations into practical action.": "Chaque mission est différente, mais notre principe reste le même : comprendre d’abord, se concentrer sur l’essentiel et transformer les recommandations en actions concrètes.",
+    "Our methodology": "Notre méthodologie",
+    "Understand before acting.": "Comprendre avant d’agir.",
+    "We begin by understanding the business context, current processes, customer needs, team realities and transformation priorities.": "Nous commençons par comprendre votre contexte, vos processus, les besoins de vos clients, la réalité de vos équipes et vos priorités.",
+    "Business objectives": "Objectifs de l’organisation",
+    "Current processes": "Processus actuels",
+    "Customer and employee needs": "Besoins des clients et des employés",
+    "Challenges and friction": "Difficultés et points de friction",
+    "Existing tools and ways of working": "Outils et façons de travailler existants",
+    "Turn insight into direction.": "Donner un cap.",
+    "We translate what we learn into clear priorities, practical recommendations and an actionable path forward.": "Nous traduisons ce que nous avons appris en priorités claires, en recommandations concrètes et en une feuille de route réaliste.",
+    "Opportunity identification": "Identification des opportunités",
+    "Prioritization": "Priorisation",
+    "Recommendations": "Recommandations",
+    "Future-state direction": "Vision cible",
+    "Actionable roadmap": "Feuille de route opérationnelle",
+    "Move from plans to action.": "Passer du plan à l’action.",
+    "We support transformation initiatives by helping structure requirements, align stakeholders, coordinate priorities and guide projects through execution.": "Nous accompagnons vos projets de transformation : structurer les besoins, aligner les parties prenantes, coordonner les priorités et guider la mise en œuvre.",
+    "Project planning": "Planification de projet",
+    "Stakeholder alignment": "Alignement des parties prenantes",
+    "Implementation coordination": "Coordination de la mise en œuvre",
+    "Delivery guidance": "Pilotage de la mise en œuvre",
+    "Build capability for lasting change.": "Ancrer le changement dans la durée.",
+    "Transformation only creates value when people can adopt it. We help teams build the knowledge, confidence and ways of working needed to sustain change.": "Une transformation ne crée de la valeur que si les équipes se l’approprient. Nous les aidons à développer les connaissances, la confiance et les réflexes nécessaires pour la faire durer.",
+    "Practical training": "Formation pratique",
+    "Team enablement": "Montée en compétences",
+    "Adoption support": "Accompagnement à l’adoption",
+    "Knowledge transfer": "Transfert de connaissances",
+    "Continuous improvement": "Amélioration continue",
+    "How we partner": "Notre façon de collaborer",
+    "Built to work with your team.": "Aux côtés de vos équipes.",
+    "We work alongside your teams throughout the engagement — bringing structure, outside perspective and practical guidance while keeping your people close to the decisions that shape the transformation.": "Nous travaillons avec vos équipes tout au long de la mission — en apportant méthode, regard extérieur et conseils concrets, tout en les gardant au cœur des décisions qui façonnent la transformation.",
+    "Collaborative": "Collaboratif",
+    "We work with the people closest to the challenge, bringing together the right perspectives throughout the engagement.": "Nous travaillons avec les personnes au plus près de l’enjeu, en réunissant les bons points de vue tout au long de la mission.",
+    "Practical": "Pragmatique",
+    "Recommendations are designed around your organization’s reality, resources and priorities — not theoretical frameworks.": "Nos recommandations partent de votre réalité, de vos ressources et de vos priorités — pas de modèles théoriques.",
+    "Flexible": "Flexible",
+    "The scope and level of support adapt to the challenge, whether you need focused guidance or support across a broader transformation initiative.": "Le périmètre et le niveau d’accompagnement s’adaptent à votre besoin, d’un conseil ciblé à un soutien sur un projet de transformation plus large.",
+    "What you can expect": "Ce que vous obtenez",
+    "Clarity at every step.": "De la clarté à chaque étape.",
+    "Clear priorities": "Des priorités claires",
+    "Actionable recommendations": "Des recommandations concrètes",
+    "Structured roadmaps": "Des feuilles de route structurées",
+    "Hands-on guidance": "Un accompagnement concret",
+    "Tell us what you’re trying to improve, explore or transform. We’ll start by understanding where you are today.": "Dites-nous ce que vous souhaitez améliorer, explorer ou transformer. Nous commencerons par comprendre où vous en êtes.",
+
+    // About
+    "About CEM Connect": "À propos de CEM Connect",
+    "Consulting built around": "Un conseil au service de",
+    "CEM Connect is an independent consulting practice focused on AI adoption and customer experience transformation.": "CEM Connect est un cabinet de conseil indépendant spécialisé dans l’adoption de l’IA et la transformation de l’expérience client.",
+    "Close collaboration.": "Une collaboration étroite.",
+    "Practical support.": "Un accompagnement concret.",
+    "We believe consulting works best when it stays close to the business. That’s why every engagement is built around direct collaboration, with a consultant working closely alongside your team from understanding the challenge to shaping the way forward.": "Nous sommes convaincus qu’un bon conseil reste au plus près du terrain. C’est pourquoi chaque mission repose sur une collaboration directe : un consultant travaille aux côtés de votre équipe, de la compréhension de l’enjeu jusqu’à la définition de la suite.",
+    "Cross-market perspective": "Perspective multimarché",
+    "A perspective shaped across markets.": "Un regard forgé sur plusieurs marchés.",
+    "Drawing on experience across Canada, France and the Middle East, CEM Connect approaches each organization with a clear understanding of its market, its customers and the way it operates.": "Une expérience acquise au Canada, en France et au Moyen-Orient, qui permet à CEM Connect d’aborder chaque organisation en tenant compte de son marché, de ses clients et de son fonctionnement.",
+    "Let’s start a conversation.": "Parlons-en.",
+    "Tell us what you’re looking to improve, explore or transform.": "Dites-nous ce que vous souhaitez améliorer, explorer ou transformer.",
+
+    // Contact
+    "Start with a": "Tout commence par une",
+    "conversation.": "conversation.",
+    "Tell us what you’re working on, what you’re exploring or where you need support.": "Parlez-nous de vos projets, de vos réflexions ou des sujets sur lesquels vous avez besoin d’aide.",
+    "Book a discovery call.": "Réservez un premier échange.",
+    "A 30-minute conversation to discuss your priorities and explore how CEM Connect could support you.": "30 minutes pour parler de vos priorités et voir comment CEM Connect peut vous accompagner.",
+    "Prefer email?": "Vous préférez écrire ?",
+    "Send us a note and we’ll get back to you.": "Envoyez-nous un message, nous vous répondrons rapidement."
+  };
+  const norm = s => s.replace(/\s+/g, ' ').trim().toLowerCase();
+  const map = new Map();
+  for (const k in D) map.set(norm(k), D[k]);
+  const orig = new WeakMap();
+  const touched = new Set();
+  let cur = 'en', mo = null, root = null;
+  function tx(node) {
+    const o = orig.has(node) ? orig.get(node) : node.nodeValue;
+    const pe = node.parentElement;
+    const fr = (pe && pe.hasAttribute('data-fr') && norm(o)) ? pe.getAttribute('data-fr') : map.get(norm(o));
+    if (fr === undefined) return;
+    if (!orig.has(node)) { orig.set(node, o); touched.add(node); }
+    const v = o.match(/^\s*/)[0] + fr + o.match(/\s*$/)[0];
+    if (node.nodeValue !== v) node.nodeValue = v;
+  }
+  function walk(el) {
+    if (el.nodeType === 3) return tx(el);
+    const w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+    let n; while ((n = w.nextNode())) tx(n);
+  }
+  function apply(r, lang) {
+    root = r || document.body; cur = lang;
+    document.documentElement.lang = lang;
+    if (lang === 'fr') {
+      walk(root);
+      if (!mo) {
+        mo = new MutationObserver(ms => { if (cur !== 'fr') return; ms.forEach(m => m.addedNodes.forEach(a => (a.nodeType === 1 || a.nodeType === 3) && walk(a))); });
+        mo.observe(root, { childList: true, subtree: true });
+      }
+    } else {
+      if (mo) { mo.disconnect(); mo = null; }
+      touched.forEach(n => { if (orig.has(n)) { n.nodeValue = orig.get(n); orig.delete(n); } });
+      touched.clear();
+    }
+  }
+  window.CCI18N = { apply };
+})();
+</script>
+<script>
+(function () {
+  var CALENDLY_URL = 'https://calendly.com/sana-nhar-cemconnect/30min';
+  var CURRENT = document.body.getAttribute('data-page');
+  var PAGES = [
+    { id: 'home', href: 'index.html', label: 'Home' },
+    { id: 'services', href: 'services.html', label: 'Services' },
+    { id: 'approach', href: 'approach.html', label: 'Our Approach' },
+    { id: 'about', href: 'about.html', label: 'About' },
+    { id: 'contact', href: 'contact.html', label: 'Contact' }
+  ];
+  var root = document.getElementById('top');
+
+  // Navigation (header, mobile, footer)
+  document.querySelectorAll('[data-nav]').forEach(function (nav) {
+    var plain = nav.hasAttribute('data-nav-plain');
+    PAGES.forEach(function (p) {
+      var a = document.createElement('a');
+      a.href = p.href;
+      a.textContent = p.label;
+      if (nav.classList.contains('nav') || plain) a.className = 'mono';
+      if (!plain && p.id === CURRENT) a.setAttribute('aria-current', 'page');
+      nav.appendChild(a);
+    });
+  });
+
+  // Mobile menu
+  var burger = document.querySelector('.burger'), mnav = document.getElementById('mnav');
+  burger.addEventListener('click', function () {
+    var open = mnav.hidden;
+    mnav.hidden = !open;
+    burger.setAttribute('aria-expanded', String(open));
+  });
+  mnav.addEventListener('click', function (e) {
+    if (e.target.closest('a')) { mnav.hidden = true; burger.setAttribute('aria-expanded', 'false'); }
+  });
+
+  // Language (shared across pages via localStorage)
+  function getLang() { try { return localStorage.getItem('cc-lang') || 'en'; } catch (e) { return 'en'; } }
+  function setLang(l) {
+    try { localStorage.setItem('cc-lang', l); } catch (e) {}
+    document.querySelectorAll('[data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === l)); });
+    window.CCI18N.apply(root, l);
+  }
+  document.querySelectorAll('[data-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-lang')); });
+  });
+  setLang(getLang());
+
+  // Booking (Calendly popup, falls back to a new tab)
+  function openBooking(e) {
+    if (!CALENDLY_URL) return;
+    e.preventDefault();
+    var open = function () { try { window.Calendly.initPopupWidget({ url: CALENDLY_URL }); } catch (err) { window.open(CALENDLY_URL, '_blank'); } };
+    if (window.Calendly) return open();
+    if (!document.getElementById('cc-cal-css')) {
+      var l = document.createElement('link');
+      l.id = 'cc-cal-css'; l.rel = 'stylesheet'; l.href = 'https://assets.calendly.com/assets/external/widget.css';
+      document.head.appendChild(l);
+    }
+    var s = document.createElement('script');
+    s.src = 'https://assets.calendly.com/assets/external/widget.js';
+    s.onload = open;
+    s.onerror = function () { window.open(CALENDLY_URL, '_blank'); };
+    document.head.appendChild(s);
+  }
+  document.querySelectorAll('[data-book]').forEach(function (a) {
+    if (CALENDLY_URL) { a.href = CALENDLY_URL; a.target = '_blank'; a.rel = 'noopener'; }
+    a.addEventListener('click', openBooking);
+  });
+
+  // Scroll reveal
+  var reveals = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(function (e) { e.setAttribute('data-in', ''); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.setAttribute('data-in', ''); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function (e) { io.observe(e); });
+  }
+})();
+</script>
+</body>
+</html>

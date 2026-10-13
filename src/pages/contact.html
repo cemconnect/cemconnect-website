@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — CEM Connect</title>
+<meta name="description" content="Book a 30-minute discovery call with CEM Connect, or email contact@cemconnect.ca.">
+{{HEAD}}
+<style>
+  .phero-sec { padding-top: clamp(80px,11vw,144px); padding-bottom: clamp(56px,7vw,88px); }
+  .phero-in { max-width: 860px; }
+  .phero p { max-width: 50ch; }
+
+  .reach { padding: 0 clamp(20px,4vw,44px) clamp(80px,10vw,136px); }
+  .reach-in { max-width: 960px; margin: 0 auto; }
+  .reach-row { display: grid; grid-template-columns: minmax(0,1.3fr) auto; gap: 28px clamp(28px,5vw,72px); align-items: center; }
+  .reach-book { padding: clamp(40px,5vw,56px) 0; border-top: 0.5px solid rgba(0,0,0,0.16); border-bottom: 0.5px solid rgba(0,0,0,0.16); }
+  .reach-book h2 { font-size: clamp(24px,2.8vw,36px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; }
+  .reach-book p { margin-top: 14px; max-width: 48ch; font-size: 16px; line-height: 1.65; color: var(--muted); text-wrap: pretty; }
+  .reach-book .cta { padding: 17px 32px; }
+  .reach-book .cta:hover { background: var(--rose-dk); }
+  .reach-mail { padding: 32px 0; row-gap: 16px; }
+  .reach-mail h3 { font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; }
+  .reach-mail p { margin-top: 10px; font-size: 15.5px; line-height: 1.6; color: var(--muted); }
+  .mail { justify-self: start; display: inline-flex; align-items: center; gap: 10px; font-size: clamp(17px,1.6vw,20px); font-weight: 500; letter-spacing: -0.01em; padding-bottom: 4px; border-bottom: 0.5px solid rgba(0,0,0,0.3); transition: border-color .2s ease, color .2s ease; overflow-wrap: anywhere; }
+  .mail:hover { border-color: var(--rose); }
+  .mail:hover .arr2 { transform: translate(3px,-3px); }
+
+  @media (max-width: 1024px) { .reach-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body data-page="contact">
+<div id="top">
+{{HEADER}}
+
+  <main>
+    <section class="wrap phero phero-sec">
+      <div class="phero-in">
+        <span class="mono eyebrow rise">Contact</span>
+        <h1 class="rise">Start with a <span class="rose">conversation.</span></h1>
+        <p class="rise">Tell us what you’re working on, what you’re exploring or where you need support.</p>
+      </div>
+    </section>
+
+    <section class="reach">
+      <div data-reveal class="reach-in">
+        <div class="reach-row reach-book">
+          <div>
+            <h2>Book a discovery call.</h2>
+            <p>A 30-minute conversation to discuss your priorities and explore how CEM Connect could support you.</p>
+          </div>
+          <div><a data-book href="mailto:contact@cemconnect.ca" class="cta cta-rose">Book a call <span class="arr" aria-hidden="true">→</span></a></div>
+        </div>
+        <div class="reach-row reach-mail">
+          <div>
+            <h3 class="mono">Prefer email?</h3>
+            <p>Send us a note and we’ll get back to you.</p>
+          </div>
+          <a href="mailto:contact@cemconnect.ca" class="mail">contact@cemconnect.ca <span class="arr2" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+{{FOOTER}}
+</div>
+{{SCRIPTS}}
+</body>
+</html>
